@@ -3,15 +3,14 @@ package entities;
 import java.util.Objects;
 
 public class User {
-    private static int id=1;
     private int userId;
     private String name;
     private Role role;
 
-    public User(Role role, String name) {
+    public User(int id, String name, Role role) {
         this.role = role;
         this.name = name;
-        this.userId = id++;
+        this.userId = id;
     }
 
     public int getUserId() {
@@ -38,11 +37,21 @@ public class User {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return userId == user.userId;
+        return userId == user.userId ;
     }
 
     @Override
     public int hashCode() {
         return Objects.hashCode(userId);
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", name='" + name + '\'' +
+                ", role=" + role +
+                '}';
+    }
+
 }

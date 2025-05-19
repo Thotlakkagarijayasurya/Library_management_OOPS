@@ -3,15 +3,14 @@ package entities;
 import java.util.Objects;
 
 public class Book {
-    private static int id=1;
     private int bookId;
     private String title;
     private String description;
     private String author;
     private int copiesAvailable;
 
-    public Book(String title, String description, String author, int copiesAvailable) {
-        this.bookId = id++;
+    public Book(int id, String title, String description, String author, int copiesAvailable) {
+        this.bookId = id;
         this.title = title;
         this.description = description;
         this.author = author;
@@ -65,4 +64,16 @@ public class Book {
     public int hashCode() {
         return Objects.hashCode(bookId);
     }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "bookId=" + bookId +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", author='" + author + '\'' +
+                ", copiesAvailable=" + copiesAvailable +
+                '}';
+    }
+
 }

@@ -4,16 +4,15 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Order {
-    private static int id=1;
-    private int oderId;
+    private int orderId;
     private int userId;
     private int bookId;
     private orderStatus status;
     private LocalDate issuedDate;
     private LocalDate dueDate;
 
-    public Order(int userId, int bookId, orderStatus status, LocalDate issuedDate, LocalDate dueDate) {
-        this.oderId = id++;
+    public Order(int id, int userId, int bookId, orderStatus status, LocalDate issuedDate, LocalDate dueDate) {
+        this.orderId = id;
         this.userId = userId;
         this.bookId = bookId;
         this.status = status;
@@ -30,7 +29,7 @@ public class Order {
     }
 
     public int getOderId() {
-        return oderId;
+        return orderId;
     }
 
     public int getBookId() {
@@ -69,11 +68,23 @@ public class Order {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return oderId == order.oderId;
+        return orderId == order.orderId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(oderId);
+        return Objects.hashCode(orderId);
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderId=" + orderId +
+                ", userId=" + userId +
+                ", bookId=" + bookId +
+                ", borrowDate=" + issuedDate +
+                ", dueDate=" + dueDate +
+                ", status=" + status +
+                '}';
     }
 }
