@@ -5,33 +5,42 @@ import entities.orderStatus;
 
 import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class OrderManager {
     //list of orders
-    //borrow or return orders
+    //creates, close, fetches orders
         Map<Integer, Order> orderStore = new HashMap<>();
         int orderIdSequence = 1;
 
-        public Order borroworder(int userId, int orderId){
-            Order order = new Order(orderIdSequence++, userId, orderId, orderStatus.BORROWED, LocalDate.now(), LocalDate.now().plusDays(30));
-            orderStore.put(orderIdSequence -1, order);
+        public Order createOrder(int userId, int bookId){
+            Order order = new Order(orderIdSequence, userId, bookId, orderStatus.BORROWED, LocalDate.now(), LocalDate.now().plusDays(30));
+            orderStore.put(orderIdSequence, order);
+            orderIdSequence+=1;
             System.out.println("New order added successfully!");
             return order;
         }
 
-        public Order updateOrder(int orderId, orderStatus status){
+        public Order closeOrder(int orderId){
             Order order = orderStore.get(orderId);
-            if(status!=null) {
-                order.setStatus(status);
+            if(order == null || order.getStatus()!=orderStatus.BORROWED){
+                System.out.println("No order found");
+                return null;
             }
+            order.setStatus(orderStatus.SUBMITTED);
             System.out.println("order details updated successfully!");
             return order;
         }
 
-        public Set<Order> fetchAllorders(){
-            return (Set<Order>) orderStore.values();
+        public void fetchAllOrders(){
+            orderStore.values().forEach(System.out::println);
+        }
+
+        public Set<Order> fetchUserSpecificOrders(int userId){
+            return orderStore.values().stream()
+                    .filter(order -> order.getUserId()==userId)
+                    .collect(Collectors.toSet());
         }
 }

@@ -28,7 +28,7 @@ public class Order {
         this.userId = userId;
     }
 
-    public int getOderId() {
+    public int getOrderId() {
         return orderId;
     }
 

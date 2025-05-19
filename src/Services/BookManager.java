@@ -20,24 +20,34 @@ public class BookManager {
         return book;
     }
 
-    public Book updateBook(int bookId, String title, String description, String author, int copies){
-        Book book = bookStore.get(bookId);
-        if(author!=null)book.setAuthor(author);
-        if(description!=null)book.setDescription(description);
-        if(title!=null)book.setTitle(title);
-        if(copies>=0)book.setCopiesAvailable(copies);
-        System.out.println("Book details updated successfully!");
-        return book;
+    public boolean borrowBook(int bookId){
+        Book book = bookStore.getOrDefault(bookId, null);
+        if(book==null || book.getCopiesAvailable()<=0){
+            return false;
+        }
+        book.setCopiesAvailable(book.getCopiesAvailable()-1);
+        System.out.println("Book "+book.getBookId()+" borrowed successfully!");
+        return true;
+    }
+
+    public boolean returnBook(int bookId){
+        Book book = bookStore.getOrDefault(bookId, null);
+        if(book==null){
+            return false;
+        }
+        book.setCopiesAvailable(book.getCopiesAvailable()+1);
+        System.out.println("Book "+book.getBookId()+" returned successfully!");
+        return true;
     }
 
     public Set<Book> fetchAllBooks(){
-        return (Set<Book>) bookStore.values();
+        return new HashSet<>(bookStore.values());
     }
 
     public Set<Book> searchBooksByTitle(String title){
         Set<Book> books = new HashSet<>();
         for(Book book: bookStore.values()){
-            if(book.getTitle().contains(title)){
+            if(book.getTitle().toLowerCase().contains(title.toLowerCase())){
                 books.add(book);
             }
         }
@@ -47,7 +57,7 @@ public class BookManager {
     public Set<Book> searchBooksByAuthor(String author){
         Set<Book> books = new HashSet<>();
         for(Book book: bookStore.values()){
-            if(book.getAuthor().contains(author)){
+            if(book.getAuthor().toLowerCase().contains(author.toLowerCase())){
                 books.add(book);
             }
         }
