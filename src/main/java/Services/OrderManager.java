@@ -1,7 +1,7 @@
-package Services;
+package main.java.Services;
 
-import entities.Order;
-import entities.orderStatus;
+import main.java.entities.Order;
+import main.java.entities.orderStatus;
 
 import java.time.LocalDate;
 import java.util.HashMap;

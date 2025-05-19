@@ -1,7 +1,7 @@
-package Services;
+package main.java.Services;
 
-import entities.Role;
-import entities.User;
+import main.java.entities.Role;
+import main.java.entities.User;
 
 import java.util.HashMap;
 import java.util.Map;

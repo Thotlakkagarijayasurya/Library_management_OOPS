@@ -1,6 +1,6 @@
-package Services;
+package main.java.Services;
 
-import entities.Book;
+import main.java.entities.Book;
 
 import java.util.HashMap;
 import java.util.HashSet;

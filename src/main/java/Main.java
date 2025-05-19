@@ -1,8 +1,10 @@
-import Services.BookManager;
-import Services.OrderManager;
-import Services.UserManager;
-import entities.Role;
-import entities.User;
+package main.java;
+
+import main.java.Services.BookManager;
+import main.java.Services.OrderManager;
+import main.java.Services.UserManager;
+import main.java.entities.Role;
+import main.java.entities.User;
 
 import java.util.Scanner;
 
